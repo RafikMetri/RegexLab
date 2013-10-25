@@ -40,6 +40,12 @@ public class Main {
     }
 
     public static void printUrls(String text){
-        System.out.println(Arrays.toString(compile("\"(https?://)?(((\\w|-|-_)+\\.)?){2}(((\\w|-|-_)+\\.)?)(([A-Z]|[a-z]){3})(/((\\w|-|-_|.)?))?\"").split(text)));
+        //System.out.println(Arrays.toString(compile("\"(https?://)?(((\\w|-|-_)+\\.)?){2}(((\\w|-|-_)+\\.)?)(([A-Z]|[a-z]){3})(/((\\w|-|-_|.)?))?\"").split(text)));
+        Pattern regex = Pattern.compile("\"(https?://)?(((\\w|-|-_)+\\.)?){2}(((\\w|-|-_)+\\.)?)(([A-Z]|[a-z]){3})(/((\\w|-|-_|.))+)?\\\"", Pattern.CASE_INSENSITIVE);
+        Matcher search = regex.matcher(text);
+        int count = 0;
+        while (search.find()){
+            System.out.printf("Match %d: %s @ %d%n", ++ count, search.group(), search.start());
+        }
     }
 }
